@@ -32,7 +32,7 @@ body{
   text-align:center;
 }
 
-/* TAP */
+/* TAP BUTTON */
 #start{
   font-size:28px;
   padding:22px 45px;
@@ -48,11 +48,14 @@ body{
   100%{transform:scale(1)}
 }
 
-/* SURPRISE */
+/* SURPRISE BURST */
 #burst{
   position:fixed;
   inset:0;
-  background:radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,95,162,0.6), transparent);
+  background:radial-gradient(circle,
+    rgba(255,255,255,0.9),
+    rgba(255,95,162,0.6),
+    transparent);
   opacity:0;
   z-index:10;
   pointer-events:none;
@@ -70,7 +73,7 @@ body{
 /* LOVE SCENE */
 #scene{display:none;}
 
-/* MONU ZOOM */
+/* I LOVE YOU MONU – SMALL TO BIG */
 #loveMonu{
   font-size:82px;
   font-weight:900;
@@ -87,7 +90,6 @@ body{
   70%{transform:scale(1.15)}
   100%{transform:scale(1)}
 }
-
 .emoji-big{font-size:82px}
 
 /* MESSAGE */
@@ -98,14 +100,15 @@ body{
   color:#ffe9f4;
 }
 
-/* BOW – LAST */
+/* I LOVE YOU BOW – LAST */
 #finalLove{
   margin-top:32px;
   font-size:44px;
   font-weight:900;
   color:#c77dff;
-  text-shadow:0 0 18px rgba(199,125,255,0.9),
-              0 0 40px rgba(199,125,255,0.6);
+  text-shadow:
+    0 0 18px rgba(199,125,255,0.9),
+    0 0 40px rgba(199,125,255,0.6);
   animation:softBeat 1.8s infinite;
   display:none;
 }
@@ -114,7 +117,6 @@ body{
   50%{transform:scale(1.08)}
   100%{transform:scale(1)}
 }
-
 .emoji-small{
   font-size:44px;
   vertical-align:middle;
@@ -156,17 +158,19 @@ body{
   </div>
 </div>
 
-<!-- 🎵 YOUR OWN SONG -->
+<!-- 🎵 YOUR SONG -->
 <audio id="mySong" src="my-love-song.mp3"></audio>
 
 <script>
 const text =
 "Jan ☹️\n" +
 "Koto mair, koto kotha koi… kisu mone korio na suna ☹️\n" +
-"Jamai rager matay onek kisu koi dei… ☹️"Jamai rager matay onek kisu koi … ☹️"Jamai r"Ummah jan 😘\n\n" +
- tumari ❤️\n\n" + tumi amar valobasha 💕\n" +
-"Tumi chara ami ekla… 🥺\n" +
-"Kosto Dimu But sariya Jaitam Na ☹️ 🤍";
+"Jamai rager matay onek kisu koi dei… ☹️\n" +
+"Kintu mon ta shudhu tumari ❤️\n\n" +
+"Ummah jan 😘\n\n" +
+"Tumi amar oviman, tumi amar valobasha 💕\n" +
+"Tumi chara ei jamai ta adha… 🥺\n" +
+"mair kormu but sariya jaitam na 🤍";
 
 function startSurprise(){
   const burst=document.getElementById("burst");
@@ -189,10 +193,10 @@ function startSurprise(){
     document.getElementById("start").style.display="none";
     document.getElementById("scene").style.display="block";
 
-    // ▶️ PLAY YOUR SONG
+    /* 🔉 PLAY SONG WITH SOFT VOLUME */
     const song = document.getElementById("mySong");
-song.volume = 0.4;   // 🔉 40% volume (soft but clear)
-song.play();
+    song.volume = 0.4;   // 40% volume (soft & romantic)
+    song.play();
 
     typeText();
     startBackground();
