@@ -192,7 +192,9 @@ function startSurprise(){
     document.getElementById("scene").style.display="block";
 
     // ▶️ PLAY YOUR SONG
-    document.getElementById("mySong").play();
+    const song = document.getElementById("mySong");
+song.volume = 0.4;   // 🔉 40% volume (soft but clear)
+song.play();
 
     typeText();
     startBackground();
