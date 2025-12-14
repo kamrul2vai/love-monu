@@ -218,17 +218,23 @@ function typeText(){
 }
 
 function startBackground(){
+  const emojis = ["✨", "🥀", "❤️‍🩹", "🌸", "❤️"];
+
   setInterval(()=>{
-    const el=document.createElement("div");
-    el.className="bg-item";
-    el.innerHTML=Math.random()>0.5?"❤️":"✨":"🌸";
-    el.style.left=Math.random()*100+"vw";
-    el.style.fontSize=(18+Math.random()*26)+"px";
-    el.style.animationDuration=(12+Math.random()*10)+"s";
+    const el = document.createElement("div");
+    el.className = "bg-item";
+
+    // random emoji select
+    el.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (18 + Math.random() * 26) + "px";
+    el.style.animationDuration = (12 + Math.random() * 10) + "s";
+
     document.getElementById("bg").appendChild(el);
-    setTimeout(()=>el.remove(),22000);
-  },600);
-}
+    setTimeout(() => el.remove(), 22000);
+  }, 600);
+              }
 </script>
 
 </body>
