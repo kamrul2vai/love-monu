@@ -32,7 +32,7 @@ body{
   text-align:center;
 }
 
-/* TAP TEXT */
+/* TAP */
 #start{
   font-size:28px;
   padding:22px 45px;
@@ -42,14 +42,13 @@ body{
   box-shadow:0 0 40px #ffb6d9;
   animation:pulse 2s infinite;
 }
-
 @keyframes pulse{
   0%{transform:scale(1)}
   50%{transform:scale(1.12)}
   100%{transform:scale(1)}
 }
 
-/* 💥 SURPRISE BURST */
+/* SURPRISE */
 #burst{
   position:fixed;
   inset:0;
@@ -58,39 +57,67 @@ body{
   z-index:10;
   pointer-events:none;
 }
-
-/* sparkle */
 .spark{
   position:absolute;
   color:#ff9acb;
   animation:sparkFly 1s ease-out forwards;
 }
-
 @keyframes sparkFly{
-  from{transform:scale(0) translate(0,0);opacity:1}
-  to{transform:scale(1.2) translate(var(--x),var(--y));opacity:0}
+  from{transform:scale(0);opacity:1}
+  to{transform:scale(1.3) translate(var(--x),var(--y));opacity:0}
 }
 
 /* LOVE SCENE */
 #scene{display:none;}
 
-#scene h1{
+/* MONU ZOOM */
+#loveMonu{
   font-size:82px;
   font-weight:900;
   letter-spacing:3px;
-  background:linear-gradient(120deg,#ff5fa2,#ffd1e8,#ff85c2);
+  background:linear-gradient(120deg,#ff4f9a,#ffd1e8,#ff8fc7);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  text-shadow:0 0 35px rgba(255,95,162,0.7);
+  text-shadow:0 0 35px rgba(255,79,154,0.7);
+  transform:scale(0);
+  animation:monuZoom 1.4s ease-out forwards;
+}
+@keyframes monuZoom{
+  0%{transform:scale(0)}
+  70%{transform:scale(1.15)}
+  100%{transform:scale(1)}
 }
 
-/* message */
+.emoji-big{font-size:82px}
+
+/* MESSAGE */
 #msg{
-  font-size:30px;
-  margin-top:28px;
+  font-size:28px;
+  margin-top:26px;
   line-height:1.7;
   color:#ffe9f4;
-  min-height:80px;
+}
+
+/* BOW – LAST */
+#finalLove{
+  margin-top:32px;
+  font-size:44px;
+  font-weight:900;
+  color:#c77dff;
+  text-shadow:0 0 18px rgba(199,125,255,0.9),
+              0 0 40px rgba(199,125,255,0.6);
+  animation:softBeat 1.8s infinite;
+  display:none;
+}
+@keyframes softBeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+  100%{transform:scale(1)}
+}
+
+.emoji-small{
+  font-size:44px;
+  vertical-align:middle;
 }
 
 /* floating bg */
@@ -98,15 +125,11 @@ body{
   position:absolute;
   opacity:0.45;
   animation:floatUp 14s linear infinite;
-  text-shadow:0 0 15px rgba(255,120,190,0.8);
 }
-
 @keyframes floatUp{
   from{transform:translateY(110vh)}
   to{transform:translateY(-25vh)}
 }
-
-iframe{display:none;}
 </style>
 </head>
 
@@ -119,26 +142,39 @@ iframe{display:none;}
   <div id="start" onclick="startSurprise()">✨ Tap to Feel My Love ✨</div>
 
   <div id="scene">
-    <h1>❤️ I Love You Monu ❤️</h1>
+    <div>
+      <span class="emoji-big">❤️</span>
+      <span id="loveMonu">I Love You Monu</span>
+      <span class="emoji-big">❤️</span>
+    </div>
+
     <div id="msg"></div>
+
+    <div id="finalLove">
+      I Love You Bow <span class="emoji-small">🫠❤️‍🩹</span>
+    </div>
   </div>
 </div>
 
-<iframe id="song" allow="autoplay"></iframe>
+<!-- 🎵 YOUR OWN SONG -->
+<audio id="mySong" src="my-love-song.mp3"></audio>
 
 <script>
 const text =
-"Monu 💕\n" +
-"Tumi amar diner shuru, rater shesh 🌙\n" +
-"Tumar ekta hashite amar sob kosto vule jai 😊\n" +
-"Ami shudhu tomakei chai, aaj o… kal o… chirodin 💖";
+"Jan ☹️\n" +
+"Koto mair, koto kotha koi… kisu mone korio na suna ☹️\n" +
+"Jamai rager matay onek kisu koi feli… ☹️\n" +
+"Kintu mon ta shudhu tomar-i ❤️\n\n" +
+"Ummah jan 😘\n\n" +
+"Tumi amar oviman, tumi amar valobasha 💕\n" +
+"Tumi chara ami ekla… 🥺\n" +
+"Kosto Dimu But sariya Jaitam Na ☹️ 🤍";
 
 function startSurprise(){
   const burst=document.getElementById("burst");
   burst.style.opacity="1";
   setTimeout(()=>burst.style.opacity="0",300);
 
-  // sparkle effect
   for(let i=0;i<20;i++){
     const s=document.createElement("div");
     s.className="spark";
@@ -151,13 +187,12 @@ function startSurprise(){
     setTimeout(()=>s.remove(),1000);
   }
 
-  // transition
   setTimeout(()=>{
     document.getElementById("start").style.display="none";
     document.getElementById("scene").style.display="block";
 
-    document.getElementById("song").src =
-      "https://www.youtube.com/embed/FAb39v8bkAg?autoplay=1&loop=1&playlist=FAb39v8bkAg";
+    // ▶️ PLAY YOUR SONG
+    document.getElementById("mySong").play();
 
     typeText();
     startBackground();
@@ -170,7 +205,11 @@ function typeText(){
     document.getElementById("msg").innerHTML +=
       text.charAt(i)==="\n" ? "<br>" : text.charAt(i);
     i++;
-    setTimeout(typeText,70);
+    setTimeout(typeText,65);
+  }else{
+    setTimeout(()=>{
+      document.getElementById("finalLove").style.display="block";
+    },600);
   }
 }
 
